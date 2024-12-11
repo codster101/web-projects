@@ -15,9 +15,9 @@
 		$db_name = "finance";
 		
 		$conn = new mysqli($servername,$username,$password,$db_name);
-		if($conn->connect_error) {
-			echo "Connection failed: " . $conn->connect_error;
-		}
+//		if($conn->connect_error) {
+//		echo "Connection failed: " . $conn->connect_error;
+//		}
 	?>
 </body>
 </html>
