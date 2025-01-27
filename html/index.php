@@ -4,11 +4,11 @@
 <head>
 	<title> Finance </title>
 	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="graph.js"></script>
 </head>
 <body>
-	<main>
-		<h1>hello there</h1>
-	</main>
 	<?php
 		echo 'Hello there<br/>';
 		$servername = 'localhost';
@@ -38,6 +38,7 @@
 
 		<input type="submit" value="Add Entry"/>
 	</form>
-	<?php require 'display-table.php'; ?>
+		<?php require 'display-table.php'; ?>
+		<div id="chart_div"></div>
 	</body>
 </html>
