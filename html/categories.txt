@@ -1,23 +1,43 @@
-<?php
-$categories = array(
-	"None"			=> 0,
-	"Auto Insurance"	=> 0,
-	"Auto License & Taxes"	=> 0,
-	"Bars"			=> 0,
-	"Books"			=> 0, 
-	"Car Payment"		=> 0,
-	"Car Repairs"		=> 0,
-	"Cleaning/Laundary"	=> 0,
-	"Clothes"		=> 0,
-	"Cosemetics/Hair Care"	=> 0,
-	"Dentist"		=> 0,
-	"Doctors"		=> 0,
-	"Electricity"		=> 0,
-	"Entertainment"		=> 0,
-	"Gas Bill"		=> 0,
-	"Gas & Oil"		=> 0,
-	"Gifts"			=> 0,
-	"Groceries"		=> 0,
+None	0
+Auto Insurance	0
+Auto License & Taxes	0
+Bars	0
+Books	0
+Car Payment	0
+Car Repairs	0
+Cleaning/Laundary	0
+Clothes	0
+Cosemetics/Hair Care	0
+Dentist	0
+Doctors	0
+Electricity	0
+Entertainment	0
+Gas Bill	0
+Gas & Oil	0
+Gifts	0
+Groceries	0
+Gym	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
+None	0
 	"Gym"			=> 0,
 	"Health Insurance"	=> 0,
 	"Hobbies"		=> 0,
@@ -45,11 +65,3 @@ $categories = array(
 	"Water"			=> 0,
 );
 
-function GetCategories($c) {
-	foreach($c as $k => $v) {
-		echo "<option value=$k>$k</option>";
-	}
-}
-
-
-?>

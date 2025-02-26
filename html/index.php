@@ -1,4 +1,6 @@
-<?php require 'insert.php'?>
+<?php require 'generate-categories.php'; ?>
+<?php require 'budget_amount.php';?>
+<?php require 'insert.php';?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,18 +29,40 @@
 			echo "Connection Error!!";
 		}
 	?>
-	<form action="" method="POST">
+	<form action="?submit_type=entry" method="POST">
 	
 		<input type="text" id="name" name="name" required/>	
 		<input type="decimal" step="0.01" id="amount" name="amount" required/>
 		<input type="date" id="date" name="date" required/>
-		<select id="category" name="category" required/>
-		<option value="">Select One</option>
-		<?php require 'generate-categories.php'; ?>
+		<select id="category" name="category" required>
+			<option value="">Select One</option>
+			<?php GetCategories($categories); ?>
+		</select>
 
 		<input type="submit" value="Add Entry"/>
 	</form>
-		<?php require 'display-table.php'; ?>
-		<div id="chart_div"></div>
-	</body>
+	<form action="?submit_type=filters" method="POST">
+		<select id="category" name="filter_category">
+			<?php GetCategories($categories); ?>
+		</select>
+		<select id="starting_month" name="filter_starting_month">
+			<?php require 'month_select_options.php'?>
+		</select>
+		<select id="ending_month" name="filter_ending_month">
+			<?php require 'month_select_options.php'?>
+		</select>
+		<input type="submit" value="Apply Filters"/>
+	</form>
+
+	<?php require 'display-table.php'; ?>
+
+	<div id="chart_div"></div>
+	<?php require 'category-divs.php'; ?>
+	<p>Category Title</p>
+	<form action="?submit_type=budget_amount" method="POST">
+		<input type="number" id="budget_amt" name="budget_amt"/>
+		<input type="hidden" id="category" name="category" value="Groceries"/>
+		</form>
+	<p><?php DisplayBudgetStatus('Groceries');?></p>
+</body>
 </html>
