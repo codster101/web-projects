@@ -10,7 +10,7 @@ export function Grid() {
 	const gap = 2;
 
 	let alter = true;
-	const squares = Array.from(Array(height), () => {
+	let squares = Array.from(Array(height), () => {
 		alter = !alter;
 		return new Array(width).fill(Square(alter));
 	});
@@ -39,26 +39,46 @@ export function Grid() {
 		}
 	}
 
-	function managePopulation() {
-
-		squares = squares.map(x => check_box(x));
-
+	function manage_population() {
+		let new_squares = Array.from(Array(height), () => new Array(width));
+		for (let i = 0; i <= height; i++) {
+			for (let j = 0; j <= width; j++) {
+				new_squares[i][j] = check_box(i, j);
+			}
+		}
+		squares = new_squares;
 	}
 
-	function check_box(box) {
+	function check_box(x, y) {
 		let neighbors = 0;
 		for (let i = -1; i <= 1; i++) {
 			for (let j = -1; j <= 1; j++) {
+				// Skip self
 				if (i == 0 && j == 0) continue;
 
-				// if(
+				// Ensure indices are valid and check if neighbor is alive
+				if (x + i >= 0 && x + i < width && y + j >= 0 && y + j < height) {
+					if (squares[x + i][y + j].is_alive()) neighbors++;
+				}
 			}
 		}
 
+		let current = squares[x][y];
+
+		if (current.is_alive()) {
+
+			if (neighbors == 2 || neighbors == 3) return new Square(true);
+
+			return new Square(false);
+		}
+
+		if (current.is_alive() && neighbors == 3) return new Square(true);
+
+		return new Square(false);
 	}
 
 	return {
 		draw,
-		managePopulation
+		manage_population
 	};
 }

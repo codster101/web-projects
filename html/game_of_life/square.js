@@ -1,9 +1,11 @@
 export function Square(alive = false) {
 	const is_alive = alive;
 
-	function setLife(alive) {
+	function set_life(alive) {
 		is_alive = alive;
 	}
+
+	function get_life() { return is_alive; }
 
 	function draw(ctx, x, y, width, height) {
 		if (is_alive) {
@@ -15,7 +17,8 @@ export function Square(alive = false) {
 	}
 
 	return {
-		setLife,
+		set_life,
+		get_life,
 		draw
 	}
 }
