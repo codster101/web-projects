@@ -54,9 +54,10 @@
 		<input type="submit" value="Apply Filters"/>
 	</form>
 
+	<div id="chart_div"></div>
+
 	<?php require 'display-table.php'; ?>
 
-	<div id="chart_div"></div>
 	<?php require 'category-divs.php'; ?>
 	<p>Category Title</p>
 	<form action="?submit_type=budget_amount" method="POST">
@@ -64,5 +65,6 @@
 		<input type="hidden" id="category" name="category" value="Groceries"/>
 		</form>
 	<p><?php DisplayBudgetStatus('Groceries');?></p>
+
 </body>
 </html>
