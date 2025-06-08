@@ -8,6 +8,7 @@ export function Clock(g, t) {
 
 	function cycle_events() {
 		g.manage_population();
+		g.draw();
 	}
 
 	function stop() {
