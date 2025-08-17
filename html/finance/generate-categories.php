@@ -45,11 +45,18 @@ $categories = array(
 	"Water"			=> 0,
 );
 
-function GetCategories($c) {
-	foreach($c as $k => $v) {
+function GetCategories() {
+	global $categories;
+	foreach($categories as $k => $v) {
 		echo "<option value=$k>$k</option>";
 	}
 }
+
+function GetCategory($c) {
+	global $categories;
+	return $categories[$c];	
+}
+
 
 
 ?>

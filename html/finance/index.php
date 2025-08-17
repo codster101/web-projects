@@ -36,14 +36,14 @@
 		<input type="date" id="date" name="date" required/>
 		<select id="category" name="category" required>
 			<option value="">Select One</option>
-			<?php GetCategories($categories); ?>
+			<?php GetCategories(); ?>
 		</select>
 
 		<input type="submit" value="Add Entry"/>
 	</form>
 	<form action="?submit_type=filters" method="POST">
 		<select id="category" name="filter_category">
-			<?php GetCategories($categories); ?>
+			<?php GetCategories(); ?>
 		</select>
 		<select id="starting_month" name="filter_starting_month">
 			<?php require 'month_select_options.php'?>
@@ -59,12 +59,19 @@
 	<?php require 'display-table.php'; ?>
 
 	<?php require 'category-divs.php'; ?>
-	<p>Category Title</p>
-	<form action="?submit_type=budget_amount" method="POST">
-		<input type="number" id="budget_amt" name="budget_amt"/>
-		<input type="hidden" id="category" name="category" value="Groceries"/>
-		</form>
-	<p><?php DisplayBudgetStatus('Groceries');?></p>
+
+	<?php foreach($categories as $cat => $amt): ?>
+		<div class="cat_divs">
+			<?php if($cat == "None") continue; ?>
+			<p><?= $cat ?></p>
+			<form action="?submit_type=budget_amount" method="POST">
+				<input type="number" id="budget_amt" name="budget_amt"/>
+				<input type="hidden" id="category" name="category" value="Groceries"/>
+			</form>
+			<p><?php DisplayBudgetStatus($cat);?></p>
+		</div>
+	<?php endforeach; ?>
+
 
 </body>
 </html>
