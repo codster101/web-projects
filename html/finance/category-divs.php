@@ -10,9 +10,9 @@ function DisplayBudgetStatus($c) {
 	$budgeted = GetBudgetForCategory($c);
 
 	// display budgeted - spent
-	echo $budgeted . "<br>";
-	echo $spent . "<br>";
-	echo $budgeted - $spent;
+	echo "Budgeted: " . $budgeted . "<br>";
+	echo "Spent: " . $spent . "<br>";
+	echo "Remaining: " . $budgeted - $spent;
 }
 
 function GetPurchasesInCurrentMonth($c) {

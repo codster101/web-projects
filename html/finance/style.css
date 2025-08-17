@@ -2,6 +2,31 @@ td {
 	text-align: center;
 }
 
+body {
+	display: flex;
+}
+
+#main {
+	width: 89%;
+}
+
+#cats {
+	display: flex;
+	width: 11%;
+	height: 100vh;
+	flex-direction: column;
+	overflow-y: scroll;
+}
+
 .cat_divs {
 	border: solid;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 5px;
+	border-width: thin;
+	background-color: #524f49;
+}
+
+.center {
+	text-align: center;
 }
