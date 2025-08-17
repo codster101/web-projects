@@ -19,7 +19,7 @@ function GetPurchasesInCurrentMonth($c) {
 	require 'connect_to_db.php';
 	$result = $conn->query("SELECT * FROM budget WHERE Category='{$c}'");
 	//	$m = GetCurrentMonth();
-	$m = 01;
+	$m = GetCurrentMonth();
 	$spent = 0;
 	while ($r = $result->fetch_assoc()) {
 		if(GetMonthFromDate($r["Date"]) == $m){
@@ -27,6 +27,15 @@ function GetPurchasesInCurrentMonth($c) {
 		}
 	}
 	return $spent;
+}
+
+function GetbackgroundColor($c) {
+	if(GetBudgetForCategory($c) - GetPurchasesInCurrentMonth($c) > 0) {
+		return '"' . "background-color: green" . '"';
+	}
+	else if(GetBudgetForCategory($c) - GetPurchasesInCurrentMonth($c) < 0) {
+		return '"' . "background-color: red" . '"';
+	}
 }
 
 function GetCurrentMonth() {

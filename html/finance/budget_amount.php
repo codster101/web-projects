@@ -5,7 +5,7 @@
 // Budgeted amount set by the input field
 function GetBudgetForCategory($c) {
 	global $conn;
-	$result = $conn->query("SELECT Amount FROM budget_amounts WHERE Category='Groceries'");
+	$result = $conn->query("SELECT Amount FROM budget_amounts WHERE Category='{$c}'");
 	return $result->fetch_assoc()["Amount"]; 
 }
 

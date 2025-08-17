@@ -23,13 +23,8 @@
 			ini_set('display_errors', 1);
 			mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 			$conn = mysqli_connect('127.0.0.1', $username,$password, $db_name);
-			if($conn) {
-				echo "Finally you did it<br/>";
-			}
-			else {
-				echo "Connection Error!!";
-			}
 		?>
+
 		<form action="?submit_type=entry" method="POST">
 		
 			<input type="text" id="name" name="name" required/>	
@@ -55,27 +50,29 @@
 			<input type="submit" value="Apply Filters"/>
 		</form>
 
+		<!-- The graph -->
 		<div id="chart_div"></div>
 
+		
+		<!-- List of purchases -->
 		<?php require 'display-table.php'; ?>
 	</div>
 
-	<?php require 'category-divs.php'; ?>
-
-	<div id="cats">
-		<?php foreach($categories as $cat => $amt): ?>
-			<?php if($cat == "None") continue; ?>
-			<div class="cat_divs">
-				<p class="center"><?= $cat ?></p>
-				<form class="center" action="?submit_type=budget_amount" method="POST">
-					<input type="number" id="budget_amt" name="budget_amt" placeholder="Change Budget"/>
-					<input type="hidden" id="category" name="category" value=<?= '"' . $cat . '"' ?>/>
-				</form>
-				<p><?php DisplayBudgetStatus($cat);?></p>
-			</div>
-		<?php endforeach; ?>
-	</div>
-
+		<!-- The categories-->
+		<?php require 'category-divs.php'; ?>
+		<div id="cats" >
+			<?php foreach($categories as $cat => $amt): ?>
+				<?php if($cat == "None") continue; ?>
+				<div class="cat_divs" style=<?= GetBackgroundColor($cat) ?>>
+					<p class="center"><?= $cat ?></p>
+					<form class="center" action="?submit_type=budget_amount" method="POST">
+						<input type="number" id="budget_amt" name="budget_amt" placeholder="Change Budget"/>
+						<input type="hidden" id="category" name="category" value=<?= '"' . $cat . '"' ?>/>
+					</form>
+					<p><?php DisplayBudgetStatus($cat);?></p>
+				</div>
+			<?php endforeach; ?>
+		</div>
 
 </body>
 </html>
