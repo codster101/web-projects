@@ -54,13 +54,17 @@
 		<div id="chart_div"></div>
 
 		
-		<!-- List of purchases -->
-		<?php require 'display-table.php'; ?>
 	</div>
 
-		<!-- The categories-->
-		<?php require 'category-divs.php'; ?>
+	<div id="bottom">
+		<!-- List of purchases -->
+		<div id="table">
+			<?php require 'display-table.php'; ?>
+		</div>
+
 		<div id="cats" >
+			<!-- The categories-->
+			<?php require 'category-divs.php'; ?>
 			<?php foreach($categories as $cat => $amt): ?>
 				<?php if($cat == "None") continue; ?>
 				<div class="cat_divs" style=<?= GetBackgroundColor($cat) ?>>
@@ -73,6 +77,7 @@
 				</div>
 			<?php endforeach; ?>
 		</div>
+	</div>
 
 </body>
 </html>

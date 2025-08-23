@@ -3,19 +3,33 @@ td {
 }
 
 body {
-	display: flex;
 }
 
 #main {
-	width: 89%;
+	height: 20vh;
+}
+
+#bottom {
+	height: 79vh;
+	display: flex;
+	padding-bottom: 1vh;
+}
+
+#table {
+	width: 50%;
+	display: grid;
+	overflow-y: scroll;
+	margin-right: 1vw;
+	margin-left: 1vw;
 }
 
 #cats {
-	display: flex;
-	width: 11%;
-	height: 100vh;
-	flex-direction: column;
+	display: grid;
+	width: 50%;
 	overflow-y: scroll;
+	grid-template-columns: auto auto auto auto;
+	margin-left: 1vw;
+	margin-right: 1vw;
 }
 
 .cat_divs {
@@ -29,4 +43,18 @@ body {
 
 .center {
 	text-align: center;
+}
+
+table {
+	border-collapse: collapse;
+	border: 2px solid white;
+}
+
+thead {
+	background-color: gray
+}
+
+th, td {
+	border: 1px solid white;
+	padding: 8px 10px;
 }
