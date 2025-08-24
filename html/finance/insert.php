@@ -21,6 +21,8 @@ $conn = mysqli_connect('127.0.0.1', $username,$password, $db_name);
 	# echo "$k : $v <br>";
 # }
 # echo "End Request<br/>";
+# echo "Handling calls to the server";
+
 if($_POST && $_REQUEST['submit_type'] == 'entry') { // && $_SERVER['submit']) {
 	$name = $_POST['name'];
 	$amt  = $_POST['amount'];
@@ -66,4 +68,32 @@ if($_POST && $_REQUEST['submit_type'] == 'budget_amount') {
 	header("location: ", $_SERVER["PHP_SELF"]);
 	exit;
 }
+
+if($_POST && $_REQUEST['submit_type'] == 'edit_table_name') {
+	mysqli_query($conn, "UPDATE budget SET Name = '{$_POST['val']}' WHERE id = '{$_POST['id']}'");
+	header("location: ", $_SERVER["PHP_SELF"]);
+	exit;
+}
+
+if($_POST && $_REQUEST['submit_type'] == 'edit_table_amt') {
+	mysqli_query($conn, "UPDATE budget SET Amount = '{$_POST['val']}' WHERE id = '{$_POST['id']}'");
+	header("location: ", $_SERVER["PHP_SELF"]);
+	exit;
+}
+
+if($_POST && $_REQUEST['submit_type'] == 'edit_table_date') {
+	mysqli_query($conn, "UPDATE budget SET Date = '{$_POST['val']}' WHERE id = '{$_POST['id']}'");
+	header("location: ", $_SERVER["PHP_SELF"]);
+	exit;
+}
+
+if($_POST && $_REQUEST['submit_type'] == 'edit_table_cat') {
+	mysqli_query($conn, "UPDATE budget SET Category = '{$_POST['val']}' WHERE id = '{$_POST['id']}'");
+	header("location: ", $_SERVER["PHP_SELF"]);
+	exit;
+}
+
+
+# echo "Finishing handling calls to server";
+
 ?>

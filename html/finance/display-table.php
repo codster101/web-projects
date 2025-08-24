@@ -34,22 +34,65 @@ uasort($sorted, 'compMonths');
 
 // Display the filters
 echo "<p>Filters</p>";
-echo "<p>Category: {$filter_cat}</br>Start Month: {$filter_begin_month}</br>End Month: {$filter_end_month}</p>";
+echo "<p>Category: {$filter_cat}<br>Start Month: {$filter_begin_month}<br>End Month: {$filter_end_month}</p>";
 
 // Display the total spent this month
 GetTotalPurchasesThisMonth();
 
 // Display the table
-echo '<table>';
-echo '<thead><tr><th scope="row">Name</th><th scope="row">Amount</th><th scope="row">Date</th><th scope="row">Category</th></tr></thead>';
-echo '<tbody>';
+echo <<<EOT
+
+	<table>
+		<thead>
+			<tr>
+				<th scope="row">Name</th>
+				<th scope="row">Amount</th>
+				<th scope="row">Date</th>
+				<th scope="row">Category</th>
+			</tr>
+		</thead>
+		<tbody>
+
+	EOT;
 foreach($sorted as $row) {
 	if(isValidDate($row[3], $filter_begin_month, $filter_end_month)) {
-		printf("<tr><th scope='row'>%s</th><td>%.2f</td><td>%s</td><td>%s</td></tr>\n", $row[1], $row[2], $row[3], $row[4]);
+		printf(<<<EOT
+				<tr>
+					<th scope='row'>
+						<form action='?submit_type=edit_table_name' method='POST'>
+							<input type='hidden' name='id' value='%d'/>
+							<input type='text' name='val' value="%s"/>
+							<input type='submit' value="change"/>
+						</form>
+					</th>
+					<td>
+						<form action='?submit_type=edit_table_amt' method='POST'>
+							<input type='hidden' name='id' value='%d'/>
+							<input type='number' name='val' value="%.2f"/>
+							<input type='submit' value="change"/>
+						</form>
+					</td>
+					<td>
+						<form action='?submit_type=edit_table_date' method='POST'>
+							<input type='hidden' name='id' value='%d'/>
+							<input type='date' name='val' value="%s"/>
+							<input type='submit' value="change"/>
+						</form>
+					</td>
+					<td>
+						<form action='?submit_type=edit_table_cat' method='POST'>
+							<input type='hidden' name='id' value='%d'/>
+							<input type='text' name='val' value="%s"/>
+							<input type='submit' value="change"/>
+						</form>
+					</td>
+				</tr>\n
+			EOT,
+		$row[0], $row[1], $row[0], $row[2], $row[0], $row[3], $row[0], $row[4]);
 	}
 }
-echo '</tbody>';
-echo '</table>';
+echo "</tbody>\n";
+echo "</table>";
 
 function GetTotalPurchasesThisMonth() {
 	// Query for amounts 
