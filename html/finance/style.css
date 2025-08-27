@@ -12,23 +12,28 @@ body {
 #screen {
 	height: 98vh;
 	overflow: hidden;
+	display: flex;
+	flex-direction: column;
 }
 
 #bottom {
 	// height: 54vh;
 	display: flex;
 	padding-bottom: 1vh;
+	min-height: 0;	
 }
 
 #table_sec {
 	width: 50%;
-	display: grid;
+	display: flex;
+	flex-direction: column;
 	margin-right: 1vw;
 	margin-left: 1vw;
 }
 
 #table {
 	overflow-y: scroll;
+	min-width: 0;
 }
 
 #cats {
@@ -56,6 +61,7 @@ body {
 table {
 	border-collapse: collapse;
 	border: 2px solid white;
+	min-width: 0;
 }
 
 thead {
