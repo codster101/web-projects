@@ -41,17 +41,17 @@ GetTotalPurchasesThisMonth();
 
 // Display the table
 echo <<<EOT
-
-	<table>
-		<thead>
-			<tr>
-				<th scope="row">Name</th>
-				<th scope="row">Amount</th>
-				<th scope="row">Date</th>
-				<th scope="row">Category</th>
-			</tr>
-		</thead>
-		<tbody>
+	<div id="table">
+		<table>
+			<thead>
+				<tr>
+					<th scope="row">Name</th>
+					<th scope="row">Amount</th>
+					<th scope="row">Date</th>
+					<th scope="row">Category</th>
+				</tr>
+			</thead>
+			<tbody>
 
 	EOT;
 foreach($sorted as $row) {
@@ -59,28 +59,28 @@ foreach($sorted as $row) {
 		printf(<<<EOT
 				<tr>
 					<th scope='row'>
-						<form action='?submit_type=edit_table_name' method='POST'>
+						<form action='?submit_type=edit_table_name' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
 							<input type='text' name='val' value="%s"/>
 							<input type='submit' value="change"/>
 						</form>
 					</th>
 					<td>
-						<form action='?submit_type=edit_table_amt' method='POST'>
+						<form action='?submit_type=edit_table_amt' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
 							<input type='number' name='val' value="%.2f"/>
 							<input type='submit' value="change"/>
 						</form>
 					</td>
 					<td>
-						<form action='?submit_type=edit_table_date' method='POST'>
+						<form action='?submit_type=edit_table_date' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
 							<input type='date' name='val' value="%s"/>
 							<input type='submit' value="change"/>
 						</form>
 					</td>
 					<td>
-						<form action='?submit_type=edit_table_cat' method='POST'>
+						<form action='?submit_type=edit_table_cat' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
 							<input type='text' name='val' value="%s"/>
 							<input type='submit' value="change"/>
@@ -91,8 +91,11 @@ foreach($sorted as $row) {
 		$row[0], $row[1], $row[0], $row[2], $row[0], $row[3], $row[0], $row[4]);
 	}
 }
-echo "</tbody>\n";
-echo "</table>";
+echo <<<EOT
+			</tbody>
+		</table>
+	</div>
+EOT;
 
 function GetTotalPurchasesThisMonth() {
 	// Query for amounts 

@@ -6,21 +6,29 @@ body {
 }
 
 #main {
-	height: 20vh;
+	// height: 45vh;
+}
+
+#screen {
+	height: 98vh;
+	overflow: hidden;
 }
 
 #bottom {
-	height: 79vh;
+	// height: 54vh;
 	display: flex;
 	padding-bottom: 1vh;
 }
 
-#table {
+#table_sec {
 	width: 50%;
 	display: grid;
-	overflow-y: scroll;
 	margin-right: 1vw;
 	margin-left: 1vw;
+}
+
+#table {
+	overflow-y: scroll;
 }
 
 #cats {
@@ -57,4 +65,8 @@ thead {
 th, td {
 	border: 1px solid white;
 	padding: 8px 10px;
+}
+
+.flex {
+	display: flex;
 }
