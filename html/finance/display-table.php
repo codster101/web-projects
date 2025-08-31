@@ -33,8 +33,8 @@ $sorted = $result->fetch_all();
 uasort($sorted, 'compMonths'); 
 
 // Display the filters
-echo "<p>Filters</p>";
-echo "<p>Category: {$filter_cat}<br>Start Month: {$filter_begin_month}<br>End Month: {$filter_end_month}</p>";
+echo "<h3>Filters</h3>";
+echo "<pre>Category: {$filter_cat}		Start Month: {$filter_begin_month}	End Month: {$filter_end_month}</pre>";
 
 // Display the total spent this month
 GetTotalPurchasesThisMonth();
@@ -49,6 +49,7 @@ echo <<<EOT
 					<th scope="row">Amount</th>
 					<th scope="row">Date</th>
 					<th scope="row">Category</th>
+					<th scope="row"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -61,34 +62,40 @@ foreach($sorted as $row) {
 					<th scope='row'>
 						<form action='?submit_type=edit_table_name' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
-							<input type='text' name='val' value="%s"/>
+							<input class='shrink' type='text' name='val' value="%s"/>
 							<input type='submit' value="change"/>
 						</form>
 					</th>
 					<td>
 						<form action='?submit_type=edit_table_amt' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
-							<input type='number' name='val' value="%.2f"/>
+							<input class='shrink' type='number' name='val' value="%.2f"/>
 							<input type='submit' value="change"/>
 						</form>
 					</td>
 					<td>
 						<form action='?submit_type=edit_table_date' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
-							<input type='date' name='val' value="%s"/>
+							<input class='shrink' type='date' name='val' value="%s"/>
 							<input type='submit' value="change"/>
 						</form>
 					</td>
 					<td>
 						<form action='?submit_type=edit_table_cat' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
-							<input type='text' name='val' value="%s"/>
+							<input class='shrink' type='text' name='val' value="%s"/>
 							<input type='submit' value="change"/>
+						</form>
+					</td>
+					<td>
+						<form action='?submit_type=delete_row' method='POST' class='flex'>
+							<input type='hidden' name='id' value='%d'/>
+							<input type='submit' value="delete"/>
 						</form>
 					</td>
 				</tr>\n
 			EOT,
-		$row[0], $row[1], $row[0], $row[2], $row[0], $row[3], $row[0], $row[4]);
+		$row[0], $row[1], $row[0], $row[2], $row[0], $row[3], $row[0], $row[4], $row[0]);
 	}
 }
 echo <<<EOT

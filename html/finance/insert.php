@@ -93,6 +93,21 @@ if($_POST && $_REQUEST['submit_type'] == 'edit_table_cat') {
 	exit;
 }
 
+if($_POST && $_REQUEST['submit_type'] == 'delete_row') {
+	mysqli_query($conn, "DELETE FROM budget WHERE id = '{$_POST['id']}'");
+	header("location: ", $_SERVER["PHP_SELF"]);
+	exit;
+}
+
+if($_POST && $_REQUEST['submit_type'] == 'import_file') {
+	var_dump($_FILES['upfile']);
+	//header("location: ", $_SERVER["PHP_SELF"]);
+	//exit;
+}
+
+
+
+
 
 # echo "Finishing handling calls to server";
 

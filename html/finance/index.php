@@ -14,7 +14,6 @@
 	<div id="screen">
 		<div id="main">
 			<?php
-				echo 'Hello there<br/>';
 				$servername = 'localhost';
 				$username = 'php';
 				$password = 'I@MTHEweb000';
@@ -38,6 +37,13 @@
 
 				<input type="submit" value="Add Entry"/>
 			</form>
+
+			<form action="?submit_type=import" method="POST">
+				<p>Import Purchases</p>
+				<input type="file" name="import_doc" accept=".csv, .xls, .xlsx"/>
+				<input type=submit value="Import"/>
+			</form>
+
 			<form action="?submit_type=filters" method="POST">
 				<select id="category" name="filter_category">
 					<?php GetCategories(); ?>

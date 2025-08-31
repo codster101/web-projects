@@ -24,7 +24,6 @@ body {
 }
 
 #table_sec {
-	width: 50%;
 	display: flex;
 	flex-direction: column;
 	margin-right: 1vw;
@@ -38,9 +37,8 @@ body {
 
 #cats {
 	display: grid;
-	width: 50%;
 	overflow-y: scroll;
-	grid-template-columns: auto auto auto auto;
+	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
 	margin-left: 1vw;
 	margin-right: 1vw;
 }
@@ -71,8 +69,21 @@ thead {
 th, td {
 	border: 1px solid white;
 	padding: 8px 10px;
+	min-width: 0;
+}
+
+tr {
+	min-width: 0;
+}
+
+.shrink {
 }
 
 .flex {
 	display: flex;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+	width: 60px;
 }
