@@ -47,9 +47,11 @@ $categories = array(
 
 function GetCategories() {
 	global $categories;
+	$options = "";
 	foreach($categories as $k => $v) {
-		echo "<option value=$k>$k</option>";
+		$options = $options . "<option value='$k'>$k</option>";
 	}
+	return $options;
 }
 
 function GetCategory($c) {

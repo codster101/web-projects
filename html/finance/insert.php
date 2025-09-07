@@ -29,7 +29,7 @@ if($_POST && $_REQUEST['submit_type'] == 'entry') { // && $_SERVER['submit']) {
 	$date  = $_POST['date'];
 	$cat  = $_POST['category'];
 
-//		echo $name . $amt . $date . $cat;	
+	// echo $name . $amt . $date . $cat;	
 	$query = mysqli_prepare($conn, 'INSERT INTO budget (name, amount, date, category) VALUES (?,?,?,?)');
 	mysqli_stmt_bind_param($query, "sdss", $name, $amt, $date, $cat);
 	mysqli_stmt_execute($query);
@@ -99,13 +99,50 @@ if($_POST && $_REQUEST['submit_type'] == 'delete_row') {
 	exit;
 }
 
-if($_POST && $_REQUEST['submit_type'] == 'import_file') {
-	var_dump($_FILES['upfile']);
-	//header("location: ", $_SERVER["PHP_SELF"]);
-	//exit;
+if($_POST && $_REQUEST['submit_type'] == 'import') {
+	var_dump(is_uploaded_file($_FILES['import_doc']['tmp_name']));
+	if(($handle = fopen($_FILES['import_doc']['tmp_name'], 'r')) !== FALSE) {
+		$first_col = fgetcsv($handle, 100, ',')[0]; 
+		if($first_col == "Transaction Date") {
+			while (($data = fgetcsv($handle, 100, ',')) !== FALSE) {
+				// var_dump($data);
+				// echo "<br>";
+				$query = mysqli_prepare($conn, 'INSERT INTO budget (name, amount, date, category) VALUES (?,?,?,?)');
+
+				$date = format_date($data[0]);
+				$amt = -$data[5];
+
+				mysqli_stmt_bind_param($query, "sdss", $data[2], $amt, $date, $data[3]);
+				mysqli_stmt_execute($query);
+				// echo $query;
+				$result = mysqli_query($conn, "SELECT * FROM budget");
+			}
+		}
+		else if($first_col == "Details") {
+			while (($data = fgetcsv($handle, 100, ',')) !== FALSE) {
+				// var_dump($data);
+				// echo "<br>";
+				$query = mysqli_prepare($conn, 'INSERT INTO budget (name, amount, date, category) VALUES (?,?,?,?)');
+
+				$date = format_date($data[1]);
+				$amt = -$data[3];
+				$cat = "None";
+
+				mysqli_stmt_bind_param($query, "sdss", $data[2], $amt, $date, $cat);
+				mysqli_stmt_execute($query);
+				// echo $query;
+				$result = mysqli_query($conn, "SELECT * FROM budget");
+			}
+		}
+	}
+	header("location: ", $_SERVER["PHP_SELF"]);
+	exit;
 }
 
-
+function format_date($d) {
+	$date_info = date_parse($d);
+	return $date_info["year"] . "-" . $date_info["month"] . "-" . $date_info["day"];
+}
 
 
 

@@ -25,37 +25,45 @@
 				$conn = mysqli_connect('127.0.0.1', $username,$password, $db_name);
 			?>
 
-			<form action="?submit_type=entry" method="POST">
-			
-				<input type="text" id="name" name="name" required/>	
-				<input type="decimal" step="0.01" id="amount" name="amount" required/>
-				<input type="date" id="date" name="date" required/>
-				<select id="category" name="category" required>
-					<option value="">Select One</option>
-					<?php GetCategories(); ?>
-				</select>
+			<div id="input">
+				<div id="top-left">
+					<form action="?submit_type=entry" method="POST">
+					
+						<input type="text" id="name" name="name" required/>	
+						<input type="decimal" step="0.01" id="amount" name="amount" required/>
+						<input type="date" id="date" name="date" required/>
+						<select id="category" name="category" required>
+							<option value="">Select One</option>
+							<?= GetCategories(); ?>
+						</select>
 
-				<input type="submit" value="Add Entry"/>
-			</form>
+						<input type="submit" value="Add Entry"/>
+					</form>
 
-			<form action="?submit_type=import" method="POST">
-				<p>Import Purchases</p>
-				<input type="file" name="import_doc" accept=".csv, .xls, .xlsx"/>
-				<input type=submit value="Import"/>
-			</form>
+					<form action="?submit_type=filters" method="POST">
+						<select id="category" name="filter_category">
+							<?php GetCategories(); ?>
+						</select>
+						<select id="starting_month" name="filter_starting_month">
+							<?php require 'month_select_options.php'?>
+						</select>
+						<select id="ending_month" name="filter_ending_month">
+							<?php require 'month_select_options.php'?>
+						</select>
+						<input type="submit" value="Apply Filters"/>
+					</form>
+				</div>
 
-			<form action="?submit_type=filters" method="POST">
-				<select id="category" name="filter_category">
-					<?php GetCategories(); ?>
-				</select>
-				<select id="starting_month" name="filter_starting_month">
-					<?php require 'month_select_options.php'?>
-				</select>
-				<select id="ending_month" name="filter_ending_month">
-					<?php require 'month_select_options.php'?>
-				</select>
-				<input type="submit" value="Apply Filters"/>
-			</form>
+
+				<div id="input_file">
+					<form enctype="multipart/form-data" action="?submit_type=import" method="POST">
+						<h3>Import Purchases</h3>
+						<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+						<input style="margin-bottom: 5px" type="file" name="import_doc" accept=".csv, .xls, .xlsx"/>
+						<input type=submit value="Import"/>
+					</form>
+				</div>
+			</div>
 
 			<!-- The graph -->
 			<div id="chart_div"></div>

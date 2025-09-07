@@ -38,6 +38,7 @@ echo "<pre>Category: {$filter_cat}		Start Month: {$filter_begin_month}	End Month
 
 // Display the total spent this month
 GetTotalPurchasesThisMonth();
+$cats = GetCategories();
 
 // Display the table
 echo <<<EOT
@@ -62,29 +63,30 @@ foreach($sorted as $row) {
 					<th scope='row'>
 						<form action='?submit_type=edit_table_name' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
-							<input class='shrink' type='text' name='val' value="%s"/>
-							<input type='submit' value="change"/>
+							<input class='shrink blend' type='text' name='val' value="%s"/>
 						</form>
 					</th>
 					<td>
 						<form action='?submit_type=edit_table_amt' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
-							<input class='shrink' type='number' name='val' value="%.2f"/>
-							<input type='submit' value="change"/>
+							<input class='shrink blend' type='number' name='val' value="%.2f"/>
 						</form>
 					</td>
 					<td>
 						<form action='?submit_type=edit_table_date' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
-							<input class='shrink' type='date' name='val' value="%s"/>
-							<input type='submit' value="change"/>
+							<input class='shrink blend' type='date' name='val' value="%s"/>
+							<input type='submit' class="blend" value="change"/>
 						</form>
 					</td>
 					<td>
 						<form action='?submit_type=edit_table_cat' method='POST' class='flex'>
 							<input type='hidden' name='id' value='%d'/>
-							<input class='shrink' type='text' name='val' value="%s"/>
-							<input type='submit' value="change"/>
+							<select id="category" class="blend" name="category" required>
+								<option value="">%s</option>
+								%s
+							</select>
+							<input type='submit' class="blend" value="change"/>
 						</form>
 					</td>
 					<td>
@@ -95,7 +97,7 @@ foreach($sorted as $row) {
 					</td>
 				</tr>\n
 			EOT,
-		$row[0], $row[1], $row[0], $row[2], $row[0], $row[3], $row[0], $row[4], $row[0]);
+		$row[0], $row[1], $row[0], $row[2], $row[0], $row[3], $row[0], $row[4], $cats, $row[0]);
 	}
 }
 echo <<<EOT

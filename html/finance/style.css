@@ -16,11 +16,27 @@ body {
 	flex-direction: column;
 }
 
+#input {
+//	display:flex;
+}
+
 #bottom {
 	// height: 54vh;
 	display: flex;
 	padding-bottom: 1vh;
 	min-height: 0;	
+}
+
+#top-left {
+}
+
+#input_file {
+	width: 200px;
+	padding: 2px;
+	margin: 5px;
+	border: solid;
+	border-radius: 5px;
+	background-color: #524f49;
 }
 
 #table_sec {
@@ -41,6 +57,7 @@ body {
 	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
 	margin-left: 1vw;
 	margin-right: 1vw;
+	width: 100%;
 }
 
 .cat_divs {
@@ -86,4 +103,9 @@ tr {
 input[type="number"] {
 	-moz-appearance: textfield;
 	width: 60px;
+}
+
+.blend {
+	border: none;
+	background-color: black;
 }
